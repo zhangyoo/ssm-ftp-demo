@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nj.nfhy.dao.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.nj.nfhy.pojo.SysUser">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="login_account" jdbcType="VARCHAR" property="loginAccount" />
+    <result column="login_pass" jdbcType="VARCHAR" property="loginPass" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_head" jdbcType="VARCHAR" property="userHead" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_sex" jdbcType="INTEGER" property="userSex" />
+    <result column="user_birthday" jdbcType="VARCHAR" property="userBirthday" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="department_key" jdbcType="VARCHAR" property="departmentKey" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, login_account, login_pass, user_name, user_head, user_phone, user_email, 
+    user_sex, user_birthday, create_time, department_key, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.nj.nfhy.pojo.SysUser">
+    insert into sys_user (user_id, login_account, login_pass, 
+      user_name, user_head, user_phone, 
+      user_email, user_sex, user_birthday, 
+      create_time, department_key, update_time
+      )
+    values (#{userId,jdbcType=BIGINT}, #{loginAccount,jdbcType=VARCHAR}, #{loginPass,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{userHead,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{userEmail,jdbcType=VARCHAR}, #{userSex,jdbcType=INTEGER}, #{userBirthday,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{departmentKey,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nj.nfhy.pojo.SysUser">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="loginAccount != null">
+        login_account,
+      </if>
+      <if test="loginPass != null">
+        login_pass,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userHead != null">
+        user_head,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userSex != null">
+        user_sex,
+      </if>
+      <if test="userBirthday != null">
+        user_birthday,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="departmentKey != null">
+        department_key,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="loginAccount != null">
+        #{loginAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPass != null">
+        #{loginPass,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userHead != null">
+        #{userHead,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=INTEGER},
+      </if>
+      <if test="userBirthday != null">
+        #{userBirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentKey != null">
+        #{departmentKey,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nj.nfhy.pojo.SysUser">
+    update sys_user
+    <set>
+      <if test="loginAccount != null">
+        login_account = #{loginAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPass != null">
+        login_pass = #{loginPass,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userHead != null">
+        user_head = #{userHead,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        user_sex = #{userSex,jdbcType=INTEGER},
+      </if>
+      <if test="userBirthday != null">
+        user_birthday = #{userBirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentKey != null">
+        department_key = #{departmentKey,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nj.nfhy.pojo.SysUser">
+    update sys_user
+    set login_account = #{loginAccount,jdbcType=VARCHAR},
+      login_pass = #{loginPass,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_head = #{userHead,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_sex = #{userSex,jdbcType=INTEGER},
+      user_birthday = #{userBirthday,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      department_key = #{departmentKey,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectSysUserList" parameterType="java.util.Map" resultType="java.util.Map">
+    select
+    t.user_id "userId",t.login_account "loginAccount"
+    from sys_user t
+    where t.login_account = #{loginAccount} and t.login_pass = #{password} limit 1
+  </select>
+
+    <select id="findByLoginAccount" parameterType="java.lang.String" resultType="java.util.Map">
+        select
+        t.user_id "userId",t.login_account "loginAccount",t.login_pass "password"
+        from sys_user t
+        where t.login_account = #{loginAccount} limit 1
+    </select>
+
+    <select id="selectUserRoleList" parameterType="java.lang.Long" resultType="java.util.Map">
+        select
+        t.user_id "userId",r.role_id "roleId",r.role_key "roleKey",r.role_value "roleValue"
+        from sys_user t
+        left join sys_user_role ur on t.user_id = ur.user_id
+        left join sys_role r on ur.role_id = r.role_id
+        where t.user_id = #{userId}
+    </select>
+
+</mapper>

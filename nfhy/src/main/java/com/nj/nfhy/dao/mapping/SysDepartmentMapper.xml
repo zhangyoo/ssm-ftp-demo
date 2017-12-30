@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nj.nfhy.dao.SysDepartmentMapper">
+  <resultMap id="BaseResultMap" type="com.nj.nfhy.pojo.SysDepartment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="department_key" jdbcType="VARCHAR" property="departmentKey" />
+    <result column="department_value" jdbcType="VARCHAR" property="departmentValue" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="parent_departmentkey" jdbcType="VARCHAR" property="parentDepartmentkey" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, department_key, department_value, description, parent_departmentkey, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_department
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_department
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.nj.nfhy.pojo.SysDepartment">
+    insert into sys_department (id, department_key, department_value, 
+      description, parent_departmentkey, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{departmentKey,jdbcType=VARCHAR}, #{departmentValue,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{parentDepartmentkey,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nj.nfhy.pojo.SysDepartment">
+    insert into sys_department
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="departmentKey != null">
+        department_key,
+      </if>
+      <if test="departmentValue != null">
+        department_value,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="parentDepartmentkey != null">
+        parent_departmentkey,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="departmentKey != null">
+        #{departmentKey,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentValue != null">
+        #{departmentValue,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="parentDepartmentkey != null">
+        #{parentDepartmentkey,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nj.nfhy.pojo.SysDepartment">
+    update sys_department
+    <set>
+      <if test="departmentKey != null">
+        department_key = #{departmentKey,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentValue != null">
+        department_value = #{departmentValue,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="parentDepartmentkey != null">
+        parent_departmentkey = #{parentDepartmentkey,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nj.nfhy.pojo.SysDepartment">
+    update sys_department
+    set department_key = #{departmentKey,jdbcType=VARCHAR},
+      department_value = #{departmentValue,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      parent_departmentkey = #{parentDepartmentkey,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nj.nfhy.dao.SysRoleMapper">
+  <resultMap id="BaseResultMap" type="com.nj.nfhy.pojo.SysRole">
+    <id column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="role_key" jdbcType="VARCHAR" property="roleKey" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="role_value" jdbcType="VARCHAR" property="roleValue" />
+    <result column="company_id" jdbcType="BIGINT" property="companyId" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_id, role_key, create_time, description, role_value, company_id, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_role
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nj.nfhy.pojo.SysRole">
+    insert into sys_role (role_id, role_key, create_time, 
+      description, role_value, company_id, 
+      update_time)
+    values (#{roleId,jdbcType=INTEGER}, #{roleKey,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{roleValue,jdbcType=VARCHAR}, #{companyId,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nj.nfhy.pojo.SysRole">
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="roleKey != null">
+        role_key,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="roleValue != null">
+        role_value,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="roleKey != null">
+        #{roleKey,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="roleValue != null">
+        #{roleValue,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nj.nfhy.pojo.SysRole">
+    update sys_role
+    <set>
+      <if test="roleKey != null">
+        role_key = #{roleKey,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="roleValue != null">
+        role_value = #{roleValue,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nj.nfhy.pojo.SysRole">
+    update sys_role
+    set role_key = #{roleKey,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      role_value = #{roleValue,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=VARCHAR}
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectRoleAuthorityList" parameterType="java.lang.String" resultType="java.util.Map">
+    select
+    t.role_id "roleId",ra.menu_code "menuCode"
+    from sys_role t
+    left join sys_role_authority ra on t.role_id = ra.role_id
+    where t.role_id in (#{roleIds})
+  </select>
+
+  <select id="selectRolePermissionList" parameterType="java.lang.String" resultType="java.util.Map">
+    select
+    t.role_id "roleId",rp.permission_menu_code "menuCode"
+    from sys_role t
+    left join sys_role_permission rp on t.role_id = rp.role_id
+    where t.role_id in (#{roleIds})
+  </select>
+
+</mapper>

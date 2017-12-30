@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+	<!--############################ 定时器myTimer ############################-->
+
+	<!-- 使用MethodInvokingJobDetailFactoryBean，任务类可以不实现Job接口，通过targetMethod指定调用方法 -->
+	<bean id="myTimer" class="com.nj.nfhy.util.timer.MyTimer" />
+    <!-- 定义目标bean和bean中的方法 -->
+	<bean id="myTimerMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="myTimer" />
+		<!-- 要执行的方法名称 -->
+		<property name="targetMethod" value="executeMethod" />
+	</bean>
+	<!-- ================================== 调度触发器 ============================== -->
+	<bean id="myTimerCronTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="myTimerMethod"></property>
+		<property name="cronExpression">
+			<value>*/20 * * * * ?</value>
+		</property>
+	</bean>
+
+	<!--	放到Scheduler容器中   -->
+	<bean id="SpringJobSchedulerFactoryBean"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!--<ref bean="myTimerCronTriggerBean" />-->
+			</list>
+		</property>
+	</bean>
+</beans>

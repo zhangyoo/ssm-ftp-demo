@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nj.nfhy.dao.SysAuthorityMapper">
+  <resultMap id="BaseResultMap" type="com.nj.nfhy.pojo.SysAuthority">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="data_url" jdbcType="VARCHAR" property="dataUrl" />
+    <result column="menu_class" jdbcType="VARCHAR" property="menuClass" />
+    <result column="menu_code" jdbcType="VARCHAR" property="menuCode" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="parent_menucode" jdbcType="VARCHAR" property="parentMenucode" />
+    <result column="sequence" jdbcType="BIGINT" property="sequence" />
+    <result column="menu_type" jdbcType="VARCHAR" property="menuType" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, data_url, menu_class, menu_code, menu_name, parent_menucode, sequence, menu_type, 
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_authority
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_authority
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.nj.nfhy.pojo.SysAuthority">
+    insert into sys_authority (id, data_url, menu_class, 
+      menu_code, menu_name, parent_menucode, 
+      sequence, menu_type, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{dataUrl,jdbcType=VARCHAR}, #{menuClass,jdbcType=VARCHAR}, 
+      #{menuCode,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{parentMenucode,jdbcType=VARCHAR}, 
+      #{sequence,jdbcType=BIGINT}, #{menuType,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nj.nfhy.pojo.SysAuthority">
+    insert into sys_authority
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dataUrl != null">
+        data_url,
+      </if>
+      <if test="menuClass != null">
+        menu_class,
+      </if>
+      <if test="menuCode != null">
+        menu_code,
+      </if>
+      <if test="menuName != null">
+        menu_name,
+      </if>
+      <if test="parentMenucode != null">
+        parent_menucode,
+      </if>
+      <if test="sequence != null">
+        sequence,
+      </if>
+      <if test="menuType != null">
+        menu_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dataUrl != null">
+        #{dataUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuClass != null">
+        #{menuClass,jdbcType=VARCHAR},
+      </if>
+      <if test="menuCode != null">
+        #{menuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentMenucode != null">
+        #{parentMenucode,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null">
+        #{sequence,jdbcType=BIGINT},
+      </if>
+      <if test="menuType != null">
+        #{menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nj.nfhy.pojo.SysAuthority">
+    update sys_authority
+    <set>
+      <if test="dataUrl != null">
+        data_url = #{dataUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuClass != null">
+        menu_class = #{menuClass,jdbcType=VARCHAR},
+      </if>
+      <if test="menuCode != null">
+        menu_code = #{menuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null">
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentMenucode != null">
+        parent_menucode = #{parentMenucode,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null">
+        sequence = #{sequence,jdbcType=BIGINT},
+      </if>
+      <if test="menuType != null">
+        menu_type = #{menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nj.nfhy.pojo.SysAuthority">
+    update sys_authority
+    set data_url = #{dataUrl,jdbcType=VARCHAR},
+      menu_class = #{menuClass,jdbcType=VARCHAR},
+      menu_code = #{menuCode,jdbcType=VARCHAR},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      parent_menucode = #{parentMenucode,jdbcType=VARCHAR},
+      sequence = #{sequence,jdbcType=BIGINT},
+      menu_type = #{menuType,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
