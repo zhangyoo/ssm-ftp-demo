@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+<!--本地仓库-->
+<localRepository>D:\\MavenRepository</localRepository>
+
+<!-- <servers>
+	<server>
+		<id>nexus-releases</id>
+		<username>admin</username>
+		<password>admin123</password>
+	</server>
+	<server>
+		<id>nexus-snapshots</id>
+		<username>admin</username>
+		<password>admin123</password>
+	</server>
+</servers> -->
+
+<mirrors>
+	<!-- 配置私服地址映射 -->
+    <!--<mirror>
+        <id>nexus-releases</id>
+        <mirrorOf>*</mirrorOf>
+        <name>MyRepository</name>
+        &lt;!&ndash;私服仓库地址&ndash;&gt;
+    <url>http://central</url>
+    </mirror>-->
+	<!-- 配置私服远程映射 -->
+	<!--<mirror>
+        <id>nexus-snapshots</id>
+        <mirrorOf>*</mirrorOf>
+        <name>NexusRepository</name>
+        &lt;!&ndash;私服仓库地址&ndash;&gt;
+        <url>http://repo1.maven.org/maven2</url>
+    </mirror>-->
+	
+</mirrors>
+
+<profiles>
+	<!-- <profile>
+        <id>my-nexus</id>
+        <repositories>
+            <repository>
+                <id>nexus-releases</id>
+                <name>MyRepository</name>
+                <url>http://central</url>
+                <releases>
+                     <enabled>true</enabled>     
+                </releases>
+                <snapshots>
+                     <enabled>false</enabled>
+                </snapshots>
+            </repository>
+        </repositories>
+        <pluginRepositories>
+            <pluginRepository>
+                <id>nexus-releases</id>
+                <url>http://central</url>
+                <releases>
+                     <enabled>true</enabled>
+                </releases>
+                <snapshots>
+                     <enabled>false</enabled>
+                </snapshots>
+            </pluginRepository>
+        </pluginRepositories>
+	</profile> -->
+	<profile>
+        <id>nexus</id>
+        <repositories>
+			<repository>
+                <id>nexus-snapshots</id>
+                <name>NexusRepository</name>
+                <url>http://repo1.maven.org/maven2</url>
+                <releases>
+                     <enabled>true</enabled>     
+                </releases>
+                <snapshots>
+                     <enabled>false</enabled>
+                </snapshots>
+            </repository>
+        </repositories>
+        <pluginRepositories>
+			<pluginRepository>
+                <id>nexus-snapshots</id>
+                <url>http://repo1.maven.org/maven2</url>
+                <releases>
+                     <enabled>true</enabled>
+                </releases>
+                <snapshots>
+                     <enabled>false</enabled>
+                </snapshots>
+            </pluginRepository>
+        </pluginRepositories>
+	</profile>
+</profiles>
+
+  <!-- 激活私服映射 -->
+ <activeProfiles>
+        <activeProfile>nexus</activeProfile>
+</activeProfiles>
+</settings>
